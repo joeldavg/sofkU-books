@@ -25,8 +25,7 @@ public class Article {
     @JoinColumn(
             name = "fkCategoryId",
             insertable = false,
-            updatable = false,
-            nullable = false
+            updatable = false
     )
     private Category category;
 

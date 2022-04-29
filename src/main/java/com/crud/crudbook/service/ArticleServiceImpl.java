@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -35,6 +36,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article updateArticle(Article article) {
+        Optional<Article> articleToBeUpdated = articleRepository.findById(article.getId());
+        if (articleToBeUpdated.isEmpty()) {
+            throw new IllegalStateException("Article with id: " + article.getId() + " was not found");
+        }
         return articleRepository.save(article);
     }
 
